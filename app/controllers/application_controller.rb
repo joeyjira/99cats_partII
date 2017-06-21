@@ -32,4 +32,8 @@ class ApplicationController < ActionController::Base
   def require_logged_out
     redirect_to cats_url if logged_in?
   end
+
+  def user_must_own_cat
+    redirect_to cats_url unless current_user == Cat.find(params[:id]).owner
+  end
 end

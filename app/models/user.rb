@@ -17,10 +17,13 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :cats
+  
+
   def self.find_by_credentials(username, password)
     user = User.find_by_user_name(username)
     return nil if user.nil?
-    user.is_password?(password) ? user : nil 
+    user.is_password?(password) ? user : nil
   end
 
   def reset_session_token!

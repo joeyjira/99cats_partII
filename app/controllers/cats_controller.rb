@@ -1,4 +1,7 @@
 class CatsController < ApplicationController
+  before_action :require_logged_in, only: [:edit, :create, :update, :destroy]
+  before_action :user_must_own_cat, only: [:edit, :create, :update, :destroy]
+
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +19,7 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.owner = current_user
     if @cat.save
       redirect_to cat_url(@cat)
     else

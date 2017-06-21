@@ -1,4 +1,8 @@
 class CatRentalRequestsController < ApplicationController
+
+  before_action :require_logged_in, only: [:edit, :create, :update, :destroy]
+  before_action :user_must_own_cat, only: [:edit, :create, :update, :destroy]
+
   def approve
     current_cat_rental_request.approve!
     redirect_to cat_url(current_cat)

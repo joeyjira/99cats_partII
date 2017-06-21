@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       redirect_to cats_url
     else
       render json: @user.errors.full_messages, status: 400
-    end 
+    end
   end
 
   private

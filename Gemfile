@@ -15,4 +15,6 @@ group :development do
   gem 'binding_of_caller'
   gem 'spring'
   gem 'pry-rails'
+  gem 'annotate'
+  gem 'bcrypt'
 end

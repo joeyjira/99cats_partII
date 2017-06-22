@@ -34,6 +34,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_must_own_cat
-    redirect_to cats_url unless current_user == Cat.find(params[:id]).owner
+    redirect_to cats_url unless current_user.cats.to_a.map(&:id).include?(params[:id].to_i)
   end
 end

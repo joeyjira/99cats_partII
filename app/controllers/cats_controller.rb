@@ -1,6 +1,6 @@
 class CatsController < ApplicationController
   before_action :require_logged_in, only: [:edit, :create, :update, :destroy]
-  before_action :user_must_own_cat, only: [:edit, :create, :update, :destroy]
+  before_action :user_must_own_cat, only: [:edit, :update, :destroy]
 
   def index
     @cats = Cat.all

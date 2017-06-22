@@ -16,6 +16,10 @@ class CatRentalRequest < ActiveRecord::Base
 
   belongs_to :cat
 
+  belongs_to :renter,
+    foreign_key: :user_id,
+    class_name: :User
+
   after_initialize :assign_pending_status
 
   validates(
@@ -28,6 +32,7 @@ class CatRentalRequest < ActiveRecord::Base
   validates :status, inclusion: STATUS_STATES
   validate :start_must_come_before_end
   validate :does_not_overlap_approved_request
+  validates :renter, presence: true 
 
   def approve!
     raise "not pending" unless self.status == "PENDING"

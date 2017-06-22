@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+req1 = CatRentalRequest.create(cat_id: 1, end_date: (1.days.ago),
+    start_date: (3.days.ago), status: "approved", user_id: 2)

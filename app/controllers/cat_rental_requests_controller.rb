@@ -1,7 +1,7 @@
 class CatRentalRequestsController < ApplicationController
 
-  before_action :require_logged_in, only: [:edit, :create, :update, :destroy]
-  before_action :user_must_own_cat, only: [:edit, :create, :update, :destroy]
+  before_action :require_logged_in, only: [:new, :create, :approve, :deny]
+  before_action :user_must_own_cat, only: [:approve, :deny]
 
   def approve
     current_cat_rental_request.approve!
@@ -11,6 +11,7 @@ class CatRentalRequestsController < ApplicationController
   def create
     @rental_request = CatRentalRequest.new(cat_rental_request_params)
     if @rental_request.save
+      @cat.renter = current_user
       redirect_to cat_url(@rental_request.cat)
     else
       flash.now[:errors] = @rental_request.errors.full_messages
